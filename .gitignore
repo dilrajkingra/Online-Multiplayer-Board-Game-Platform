@@ -1,0 +1,22 @@
+# Compiled output
+out/
+build/
+*.class
+
+# Gradle caches
+.gradle/
+gradle/wrapper/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Runtime data files (contain user credentials and stats — never commit these)
+users.properties
+playerdata.properties
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group   = 'ca.ucalgary.omg'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+application {
+    mainClass = 'MainGui'
+}
+
+// The project uses a non-standard layout: all sources live directly under src/
+// (including sub-packages like chess_logic/, go_logic/, matchmaking/, etc.)
+sourceSets {
+    main {
+        java { srcDirs = ['src'] }
+    }
+    test {
+        java { srcDirs = ['test'] }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    // JUnit 4 (keep for existing TicTacToe tests that use JUnit 4 annotations)
+    testImplementation 'junit:junit:4.13.2'
+    // Allows JUnit 5 runner to also execute JUnit 4 tests
+    testRuntimeOnly    'org.junit.vintage:junit-vintage-engine:5.10.2'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
+}
+
+// Ensure a reasonable heap for the Swing app when run via `./gradlew run`
+tasks.named('run') {
+    jvmArgs = ['-Xmx512m']
+}
